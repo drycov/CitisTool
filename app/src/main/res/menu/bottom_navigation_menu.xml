@@ -1,0 +1,31 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/note"
+        android:enabled="true"
+        android:icon="@drawable/ic_notes"
+        android:title="Note"/>
+
+    <item
+        android:id="@+id/wn"
+        android:enabled="true"
+        android:icon="@drawable/ic_work_notes"
+        android:title="@string/worknotes"/>
+    <item
+        android:id="@+id/nu"
+        android:enabled="true"
+        android:icon="@drawable/ic_network"
+        android:title="@string/networkutilites"/>
+    <group>
+        <item
+            android:id="@+id/settings"
+            android:enabled="true"
+            android:icon="@drawable/ic_baseline_settings_24"
+            android:title="@string/settings" />
+        <item
+            android:id="@+id/exit"
+            android:enabled="true"
+            android:icon="@drawable/ic_baseline_power_settings_new_24"
+            android:title="@string/exit" />
+    </group>
+
+</menu>

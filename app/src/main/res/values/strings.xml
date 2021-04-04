@@ -1,0 +1,170 @@
+<resources>
+    <string name="app_name">AdminTool</string>
+    <string name="vlsm_tabTitle">VLSM</string>
+    <string name="cidr_tabTitle">CIDR</string>
+    <string name="ip_title">Insert this IP-Address</string>
+    <string name="mask_title">Insert this Network Mask</string>
+    <string name="calculate">Calculate</string>
+    <string name="result_default">Gateway Address = N/A\nAvailable range: N/A\nBroadcast Address:\nN/A</string>
+    <string name="result_values">Gateway Address = %s\nAvailable range: %s - %s\nBroadcast Address: %s</string>
+    <string name="switch_tabTitle">Switches</string>
+    <string name="vlan_tabTitle">VLANS</string>
+    <string name="switch_description">Switch Description</string>
+    <string name="vendor">Vendor</string>
+    <string name="model">Model</string>
+    <string name="ip_address_switch">IP address Switch</string>
+    <string name="locatoin">Locatoin</string>
+    <string name="additionals">Additionals</string>
+    <string name="vlan_type">VLAN Type</string>
+    <string name="ip_interface_vlan_subnet">IP-Interface Vlan Subnet</string>
+    <string name="description_vlan">Description VLAN</string>
+    <string name="write_a_comment">Comment</string>
+    <string name="post">Post</string>
+    <string name="ip_interface_subnent">IP Interface Subnent</string>
+    <string name="vlan_description">Vlan Description</string>
+    <string name="vlan_sub_description">Vlan Sub Description</string>
+    <string name="switch_sub_description">Switch Sub Description</string>
+    <string name="vlan_id">Vlan ID</string>
+    <string name="vlan_name">Vlan Name</string>
+    <string name="ps_sw_vibro" />
+    <string name="worknotes">WorkNotes</string>
+    <string name="networkutilites">NetworkUtilites</string>
+    <string name="knowledge">Knowledge</string>
+    <string name="settings">Settings</string>
+    <string name="gateway_address">Gateway  address</string>
+    <string name="prefix">CIDR Prefix</string>
+    <string name="subnet_mask">Subnet MSK</string>
+    <string name="content">Content</string>
+    <string name="title">Title</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="remember_me">Remember me</string>
+    <string name="forget_password">Forget Password</string>
+    <string name="sign_in">Sign IN</string>
+    <string name="userEmailError">Error email</string>
+    <string name="forgot_title">Forgot password</string>
+    <string name="forgot_description">To reset password, enter your email, press the button and check mail to follow instruction.</string>
+    <string name="exit">Sign Out</string>
+    <string name="hint_switch_sn">Switch SN</string>
+    <string name="system_name">System Name</string>
+    <string name="vendor_name">Vendor Name</string>
+    <string name="switch_model">Switch Model</string>
+    <string name="switch_ip_address">Switch IP-Address</string>
+    <string name="switch_location">Switch Location</string>
+    <string name="create_user_profile">Create user profile</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="middle_name">Middle name</string>
+    <string name="user_phone">User phone</string>
+    <string name="switch_port_count">Switch port count</string>
+    <string name="smax_in_progress">In Progress</string>
+    <string name="smax_complete">Complete</string>
+    <string name="smax_all">All</string>
+    <string name="menuButton">⋮</string>
+    <string name="detail_view">Detail view</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="pref_header_about">About</string>
+    <string name="choose_email_client">Choose email client</string>
+    <string name="summary_about">We are a team of like-minded people, specialized in development of Android App Development creating new trends across the app space. Glad to Help in anyway!</string>
+    <string name="app_version">3.5</string>
+    <string name="summary_support">Got any queries? We are happy to help!</string>
+    <string name="title_send_feedback">Send Feedback</string>
+    <string name="title_faq">FAQ</string>
+    <string name="summary_faq">View frequently asked questions</string>
+    <string name="url_faq">https://www.androidhive.info/privacy-policy/</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="url_privacy">https://www.androidhive.info/privacy-policy/</string>
+    <string name="title_terms">Terms &amp; Conditions</string>
+    <string name="url_terms">https://www.androidhive.info/terms-of-service/</string>
+    <string name="title_version">Version</string>
+    <string name="key_app_version">key_app_version</string>
+    <string name="key_send_feedback">key_send_feedback</string>
+    <string name="swith_type">Swith Type</string>
+    <string name="port_active">Port Active</string>
+    <string name="all_ports">All ports</string>
+    <string name="inactive_port">Inactive Port</string>
+
+    <string-array name="vlan_types_array">
+        <item>Management</item>
+        <item>PPOE with NAT</item>
+        <item>PPOE without NAT</item>
+        <item>L3 IP-VPN</item>
+        <item>L2 VLAN</item>
+        <item>Service VLAN</item>
+        <item>Other vlan type</item>
+    </string-array>
+
+    <string-array name="switch_types_array">
+        <item>ADSL</item>
+        <item>FTTB</item>
+        <item>GPON</item>
+        <item>MPLS</item>
+        <item>DWDM</item>
+        <item>HUB</item>
+        <item>Other switch type</item>
+    </string-array>
+    <string-array name="port_types_array">
+        <item>Copper Fast Ethernet</item>
+        <item>Copper Gigabit Ethernet</item>
+        <item>Fiber Fast Ethernet</item>
+        <item>Fiber Gigabit Ethernet</item>
+        <item>E1 port</item>
+        <item>Other port type</item>
+    </string-array>
+    <string-array name="port_speed_array">
+        <item>10 mBit</item>
+        <item>100 mBit</item>
+        <item>1000 mBit</item>
+        <item>10 gBit</item>
+        <item>40 gBit</item>
+        <item>Other port speed</item>
+    </string-array>
+    <string-array name="port_link_status_array">
+        <item>Active</item>
+        <item>In Active</item>
+        <item>Enabled</item>
+        <item>Disable</item>
+        <item>Other port speed</item>
+    </string-array>
+    <string-array name="port_tarif_speed_ADSL_array">
+        <item>256 kBit 1100 &#8376;&#x20b8;</item>
+        <item>512 kBit 1550 &#8376;&#x20b8;</item>
+        <item>1 mBit 1600 &#8376;&#x20b8;</item>
+        <item>2 mBit 1900 &#8376;&#x20b8;</item>
+        <item>4 mBit 2200 &#8376;&#x20b8;</item>
+        <item>5 mBit 2500 &#8376;&#x20b8;</item>
+        <item>6 mBit 2800 &#8376;&#x20b8;</item>
+        <item>8 mBit 3100 &#8376;&#x20b8;</item>
+        <item>10 mBit 3400 &#8376;&#x20b8;</item>
+        <item>12 mBit 3700 &#8376;&#x20b8;</item>
+        <item>14 mBit 4500 &#8376;&#x20b8;</item>
+        <item>16 mBit 5300 &#8376;&#x20b8;</item>
+    </string-array>
+    <string-array name="port_tarif_speed_GPON_array">
+        <item>5 mBit 2100 &#8376;&#x20b8;</item>
+        <item>10 mBit 2500 &#8376;&#x20b8;</item>
+        <item>20 mBit 3000 &#8376;&#x20b8;</item>
+        <item>30 mBit 3200 &#8376;&#x20b8;</item>
+        <item>40 mBit 3500 &#8376;&#x20b8;</item>
+        <item>50 mBit 3800 &#8376;&#x20b8;</item>
+        <item>70 mBit 4400 &#8376;&#x20b8;</item>
+        <item>100 mBit 4600 &#8376;&#x20b8;</item>
+        <item>200 mBit 6700 &#8376;&#x20b8;</item>
+        <item>500 mBit 7800 &#8376;&#x20b8;</item>
+    </string-array>
+    <string-array name="port_tarif_speed_FTTB_array">
+        <item>5 mBit 2100 &#8376;&#x20b8;</item>
+        <item>10 mBit 2500 &#8376;&#x20b8;</item>
+        <item>20 mBit 3000 &#8376;&#x20b8;</item>
+        <item>30 mBit 3200 &#8376;&#x20b8;</item>
+        <item>40 mBit 3500 &#8376;&#x20b8;</item>
+        <item>50 mBit 3800 &#8376;&#x20b8;</item>
+        <item>70 mBit 4400 &#8376;&#x20b8;</item>
+        <item>100 mBit 4600 &#8376;&#x20b8;</item>
+        <item>200 mBit 6700 &#8376;&#x20b8;</item>
+        <item>500 mBit 7800 &#8376;&#x20b8;</item>
+    </string-array>
+
+
+</resources>

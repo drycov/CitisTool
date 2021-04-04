@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "295387346514",
+    "project_id": "citsiadmintool",
+    "storage_bucket": "citsiadmintool.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:295387346514:android:9098a8327299e53be7918b",
+        "android_client_info": {
+          "package_name": "cf.homeit.admintool"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "295387346514-c99aekkoeujh0l546690g1ong0i18lgs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqh65mFluEA5-QxrMctXixxXldvTRQ6z4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "295387346514-c99aekkoeujh0l546690g1ong0i18lgs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

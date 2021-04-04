@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main.xml"
+    app:startDestination="@id/todoListFragment">
+
+    <fragment
+        android:id="@+id/calculateFragment"
+        android:name="cf.homeit.admintool.Fragments.Calculate.CalculateFragment"
+        android:label="CalculateFragment"
+        tools:layout="@layout/fragment_calc">
+        <action
+            android:id="@+id/action_calculateFragment_to_VLSMCalculateFragment"
+            app:destination="@id/VLSMCalculateFragment" />
+        <action
+            android:id="@+id/action_calculateFragment_to_CIDRCalculateFragment"
+            app:destination="@id/CIDRCalculateFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/workNotesFragment"
+        android:name="cf.homeit.admintool.Fragments.WorkNotes.WorkNotesFragment"
+        android:label="WorkNotesFragment"
+        tools:layout="@layout/fragment_switch_vlan_base">
+        <action
+            android:id="@+id/action_workNotesFragment_to_VLANFragment"
+            app:destination="@id/VLANFragment" />
+        <action
+            android:id="@+id/action_workNotesFragment_to_switchFragment"
+            app:destination="@id/switchFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/todoListFragment"
+        android:name="cf.homeit.admintool.Fragments.Notes.NoteFragment"
+        android:label="TodoListFragment"
+        tools:layout="@layout/fragment_note">
+        <action
+            android:id="@+id/action_todoListFragment_to_noteDetailFragment"
+            app:destination="@id/noteDetailFragment" />
+        <action
+            android:id="@+id/action_todoListFragment_to_newNoteFragment"
+            app:destination="@id/newNoteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="cf.homeit.admintool.Fragments.SettingsFragment"
+        android:label="SettingsFragment"/>
+    <fragment
+        android:id="@+id/newNoteFragment"
+        android:name="cf.homeit.admintool.Fragments.Notes.NoteNewFragment"
+        android:label="NewNoteFragment"
+        tools:layout="@layout/fragment_note_new"/>
+    <fragment
+        android:id="@+id/forgotPassworFragment"
+        android:name="cf.homeit.admintool.Fragments.Auth.ForgotPassworFragment"
+        android:label="ForgotPassworFragment"
+        tools:layout="@layout/fragment_auth_restore">
+        <action
+            android:id="@+id/action_forgotPassworFragment_to_loginAuthFragment"
+            app:destination="@id/loginAuthFragment" />
+        <action
+            android:id="@+id/action_forgotPassworFragment_to_createProfileFragment"
+            app:destination="@id/createProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginAuthFragment"
+        android:name="cf.homeit.admintool.Fragments.Auth.LoginAuthFragment"
+        android:label="LoginAuthFragment"
+        tools:layout="@layout/fragment_auth"/>
+    <fragment
+        android:id="@+id/noteDetailFragment"
+        android:name="cf.homeit.admintool.Fragments.Notes.NoteDetailFragment"
+        android:label="NoteDetailFragment"
+        tools:layout="@layout/fragment_note_detail"/>
+    <fragment
+        android:id="@+id/newWNSwitchFragment"
+        android:name="cf.homeit.admintool.Fragments.WorkNotes.Switch.SwitchNewFragment"
+        android:label="NewWNSwitchFragment"
+        tools:layout="@layout/fragment_switch_new"/>
+    <fragment
+        android:id="@+id/newWNVlanFragment"
+        android:name="cf.homeit.admintool.Fragments.WorkNotes.Vlan.VlanNewFragment"
+        android:label="NewWNVlanFragment"
+        tools:layout="@layout/fragment_vlan_new"/>
+    <fragment
+        android:id="@+id/VLANFragment"
+        android:name="cf.homeit.admintool.Fragments.WorkNotes.Vlan.VLANFragment"
+        android:label="VLANFragment"
+        tools:layout="@layout/fragment_vlan">
+        <action
+            android:id="@+id/action_VLANFragment_to_newWNVlanFragment"
+            app:destination="@id/newWNVlanFragment" />
+        <action
+            android:id="@+id/action_VLANFragment_to_vlanDetailFragment"
+            app:destination="@id/vlanDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/switchFragment"
+        android:name="cf.homeit.admintool.Fragments.WorkNotes.Switch.SwitchFragment"
+        android:label="SwitchFragment"
+        tools:layout="@layout/fragment_switch">
+        <action
+            android:id="@+id/action_switchFragment_to_newWNSwitchFragment"
+            app:destination="@id/newWNSwitchFragment" />
+        <action
+            android:id="@+id/action_switchFragment_to_switchDetailFragment"
+            app:destination="@id/switchDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/switchDetailFragment"
+        android:name="cf.homeit.admintool.Fragments.WorkNotes.Switch.SwitchDetailFragment"
+        android:label="SwitchDetailFragment"
+        tools:layout="@layout/fragment_switch_detail"/>
+    <fragment
+        android:id="@+id/vlanDetailFragment"
+        android:name="cf.homeit.admintool.Fragments.WorkNotes.Vlan.VlanDetailFragment"
+        android:label="VlanDetailFragment"
+        tools:layout="@layout/fragment_vlan_detail"/>
+    <fragment android:id="@+id/placeholder"
+        tools:layout="@layout/activity_main">
+        <action
+            android:id="@+id/action_placeholder_to_todoListFragment"
+            app:destination="@id/todoListFragment" />
+        <action
+            android:id="@+id/action_placeholder_to_workNotesFragment"
+            app:destination="@id/workNotesFragment" />
+        <action
+            android:id="@+id/action_placeholder_to_forgotPassworFragment"
+            app:destination="@id/forgotPassworFragment" />
+        <action
+            android:id="@+id/action_placeholder_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_placeholder_to_calculateFragment"
+            app:destination="@id/calculateFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/VLSMCalculateFragment"
+        android:name="cf.homeit.admintool.Fragments.Calculate.VLSMCalculateFragment"
+        android:label="VLSMCalculateFragment"
+        tools:layout="@layout/fragment_calc_vlsm"/>
+    <fragment
+        android:id="@+id/CIDRCalculateFragment"
+        android:name="cf.homeit.admintool.Fragments.Calculate.CIDRCalculateFragment"
+        android:label="CIDRCalculateFragment"
+        tools:layout="@layout/fragment_calc_cidr"/>
+    <fragment
+        android:id="@+id/createProfileFragment"
+        android:name="cf.homeit.admintool.Fragments.Auth.CreateProfileFragment"
+        android:label="CreateProfileFragment"
+        tools:layout="@layout/fragment_auth_profile"/>
+    <fragment
+        android:id="@+id/switchInterfaceFragment"
+        android:name="cf.homeit.admintool.Fragments.WorkNotes.Switch.SwitchInterface.SwitchInterfaceFragment"
+        android:label="SwitchInterfaceFragment" />
+</navigation>
