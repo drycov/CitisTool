@@ -6,6 +6,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,19 +33,17 @@ import cf.homeit.admintool.ViewHolder.VlanViewHolder;
 
 import static cf.homeit.admintool.ExtendsClases.Constants.EXTRA_EDIT_KEY;
 import static cf.homeit.admintool.ExtendsClases.Constants.EXTRA_VLAN_KEY;
-import static cf.homeit.admintool.ExtendsClases.SupportVoids.showToast;
 import static cf.homeit.admintool.ExtendsClases.SupportVoids.deleteFromFirebase;
+import static cf.homeit.admintool.ExtendsClases.SupportVoids.showToast;
 
 public abstract class AbstractVLANFragment extends Fragment {
     private static final String TAG = "AbstractSwitchFragment";
     // [START define_database_reference]
-    private DatabaseReference mDatabase,mDatabaseReference;
+    private DatabaseReference mDatabase, mDatabaseReference;
     // [END define_database_reference]
     private FirebaseRecyclerAdapter<Vlan, VlanViewHolder> mAdapter;
     private RecyclerView mRecycler;
-    private GridLayoutManager mManager;
     NavController navController;
-    private FloatingActionButton newBtn;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,8 +55,9 @@ public abstract class AbstractVLANFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        return inflater.inflate(R.layout.fragment_vlan,container, false);
+        return inflater.inflate(R.layout.fragment_vlan, container, false);
     }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         if (mDatabase == null) {
@@ -65,7 +65,7 @@ public abstract class AbstractVLANFragment extends Fragment {
             mDatabase = database.getReference();
             mDatabase.keepSynced(true);
         }
-        newBtn = view.findViewById(R.id.vlanAdd);
+        FloatingActionButton newBtn = view.findViewById(R.id.vlanAdd);
         newBtn.setOnClickListener(v -> {
             navController = Navigation.findNavController(requireActivity(), R.id.first_nav_host);
             navController.navigate(R.id.newWNVlanFragment);
@@ -80,7 +80,7 @@ public abstract class AbstractVLANFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         // Set up Layout Manager, reverse layout
-        mManager = new GridLayoutManager(requireActivity(),2);
+        GridLayoutManager mManager = new GridLayoutManager(requireActivity(), 2);
 //        mManager.setReverseLayout(true);
 //        mManager.setStackFromEnd(true);
         mRecycler.setLayoutManager(mManager);
@@ -88,7 +88,7 @@ public abstract class AbstractVLANFragment extends Fragment {
         // Set up FirebaseRecyclerAdapter with the Query
         Query postsQuery = getQuery(mDatabase);
 
-        FirebaseRecyclerOptions options = new FirebaseRecyclerOptions.Builder<Vlan>()
+        FirebaseRecyclerOptions<Vlan> options = new FirebaseRecyclerOptions.Builder<Vlan>()
                 .setQuery(postsQuery, Vlan.class)
                 .build();
 
@@ -106,7 +106,7 @@ public abstract class AbstractVLANFragment extends Fragment {
                     bundle.putString(EXTRA_VLAN_KEY, postKey);
                     bundle.putString(EXTRA_EDIT_KEY, "read");
                     navController = Navigation.findNavController(requireActivity(), R.id.first_nav_host);
-                    navController.navigate(R.id.vlanDetailFragment,bundle);
+                    navController.navigate(R.id.vlanDetailFragment, bundle);
                 });
                 holder.itemView.setOnLongClickListener(v -> {
                     PopupMenu popup = new PopupMenu(holder.itemView.getContext(), holder.itemView);
@@ -114,21 +114,21 @@ public abstract class AbstractVLANFragment extends Fragment {
                         Bundle bundle = new Bundle();
                         switch (item.getItemId()) {
                             case R.id.detail:
-                                showToast(requireActivity().getApplicationContext(), "Detail: "+postKey);
+                                showToast(requireActivity().getApplicationContext(), "Detail: " + postKey);
                                 bundle.putString(EXTRA_VLAN_KEY, postKey);
                                 bundle.putString(EXTRA_EDIT_KEY, "read");
                                 navController = Navigation.findNavController(requireActivity(), R.id.first_nav_host);
-                                navController.navigate(R.id.vlanDetailFragment,bundle);
+                                navController.navigate(R.id.vlanDetailFragment, bundle);
                                 break;
                             case R.id.edit:
-                                showToast(requireActivity().getApplicationContext(), "Edit: "+postKey);
+                                showToast(requireActivity().getApplicationContext(), "Edit: " + postKey);
                                 bundle.putString(EXTRA_VLAN_KEY, postKey);
                                 bundle.putString(EXTRA_EDIT_KEY, "edit");
                                 navController = Navigation.findNavController(requireActivity(), R.id.first_nav_host);
-                                navController.navigate(R.id.vlanDetailFragment,bundle);
+                                navController.navigate(R.id.vlanDetailFragment, bundle);
                                 break;
                             case R.id.delete:
-                                deleteFromFirebase(postKey,"vlans",requireActivity().getApplicationContext());
+                                deleteFromFirebase(postKey, "vlans", requireActivity().getApplicationContext());
                                 break;
                         }
                         return false;
@@ -139,11 +139,12 @@ public abstract class AbstractVLANFragment extends Fragment {
 
                     // if you want icon with menu items then write this try-catch block.
                     try {
-                        Field mFieldPopup=popup.getClass().getDeclaredField("mPopup");
+                        Field mFieldPopup = popup.getClass().getDeclaredField("mPopup");
                         mFieldPopup.setAccessible(true);
                         MenuPopupHelper mPopup = (MenuPopupHelper) mFieldPopup.get(popup);
                         mPopup.setForceShowIcon(true);
                     } catch (Exception e) {
+                        Toast.makeText(requireActivity().getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
 
                     }
                     popup.show();
@@ -152,8 +153,9 @@ public abstract class AbstractVLANFragment extends Fragment {
                 holder.bindToModel(model);
             }
 
+            @NonNull
             @Override
-            public VlanViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+            public VlanViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
                 LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
                 return new VlanViewHolder(inflater.inflate(R.layout.item_vlan, viewGroup, false));
             }

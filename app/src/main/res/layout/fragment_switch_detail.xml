@@ -159,49 +159,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintEnd_toStartOf="@+id/switchPortInactiveLabel"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switchLocationLabel">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/portStatusActive"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/port_active" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/switchPortInactiveLabel"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-
         android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintEnd_toStartOf="@+id/switchPortAllLabel"
-        app:layout_constraintStart_toEndOf="@+id/switchPortActiveLabel"
-        app:layout_constraintTop_toBottomOf="@+id/switchLocationLabel">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/portStatusInactive"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/inactive_port" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/switchPortAllLabel"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/switchPortInactiveLabel"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/switchLocationLabel">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -217,12 +177,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switchPortInactiveLabel">
+        app:layout_constraintTop_toBottomOf="@+id/switchPortActiveLabel">
+
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/switchDescr"

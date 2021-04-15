@@ -20,14 +20,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import cf.homeit.admintool.DataModels.Note;
-import cf.homeit.admintool.ExtendsClases.AppPref;
 import cf.homeit.admintool.ExtendsClases.Constants;
 import cf.homeit.admintool.R;
 
 import static cf.homeit.admintool.ExtendsClases.Constants.EXTRA_NOTE_KEY;
+import static cf.homeit.admintool.ExtendsClases.SupportVoids.getStringPref;
 import static cf.homeit.admintool.ExtendsClases.SupportVoids.showToast;
 
-public class NoteDetailFragment extends Fragment{
+public class NoteDetailFragment extends Fragment {
     private static final String TAG = "PostDetailActivity";
     private TextView titleEt;
     private TextView contentEt;
@@ -45,8 +45,9 @@ public class NoteDetailFragment extends Fragment{
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        return inflater.inflate(R.layout.fragment_note_detail,container, false);
+        return inflater.inflate(R.layout.fragment_note_detail, container, false);
     }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         init(view);
@@ -66,11 +67,11 @@ public class NoteDetailFragment extends Fragment{
         dateEt = view.findViewById(R.id.note_Detail_time);
         saveBtn = view.findViewById(R.id.noteDetailSave);
     }
-    public  String getUid() {
-        //        User userCL = SharedPrefManager.getInstance(getActivity().getApplicationContext()).getUser();
-//        userPhone = userCL.getPhoneNumber();
-        return AppPref.getStringPref(requireActivity().getApplicationContext(), Constants.SHARED_PREF_NAME_USER, Constants.TAG_UID);
+
+    public String getUid() {
+        return getStringPref(requireActivity().getApplicationContext(), Constants.SHARED_PREF_NAME_USER, Constants.TAG_UID);
     }
+
     @Override
     public void onStart() {
         super.onStart();
@@ -95,7 +96,7 @@ public class NoteDetailFragment extends Fragment{
                 // Getting Post failed, log a message
                 Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
                 // [START_EXCLUDE]
-                showToast(requireContext().getApplicationContext(),"Failed to load post.");
+                showToast(requireContext().getApplicationContext(), "Failed to load post.");
                 // [END_EXCLUDE]
             }
         };

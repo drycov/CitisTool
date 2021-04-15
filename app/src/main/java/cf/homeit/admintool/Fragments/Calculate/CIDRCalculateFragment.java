@@ -20,11 +20,11 @@ import cf.homeit.admintool.R;
 import cf.homeit.admintool.ExtendsClases.inputFilterMinMax;
 
 public class CIDRCalculateFragment extends Fragment {
-    private MaterialTextView scrollable,outputResult;
+    private MaterialTextView scrollable, outputResult;
     private EditText octet4Data, octet3Data, octet2Data, octet1Data, subOctet4Data, subOctet3Data, subOctet2Data, subOctet1Data;
     private TextView binIP, binMask, netAddr, broadcAddr, fUsableAddr, lUsableAddr, ipCls;
 
-//    outputResult.setText("Binary IP" + "\n" + binaryValue4 + "." + binaryValue3  + "." + binaryValue2  + "." + binaryValue1
+    //    outputResult.setText("Binary IP" + "\n" + binaryValue4 + "." + binaryValue3  + "." + binaryValue2  + "." + binaryValue1
 //                    + "\n\n" + "Binary Mask" + "\n" + binaryOct4Result + "." + binaryOct3Result + "." + binaryOct2Result + "." + binaryOct1Result
 //                    + "\n" + "\n" + "Network Address" + "\n" + network4Result + "." + network3Result + "." + network2Result + "." + network1Result +
 //            "\n\n" + "Broadcast Address" + "\n" + network4Result + "." + broadcastResult3 + "." + broadcastResult2+ "." + broadcastResult1 + "\n\n" +
@@ -76,11 +76,10 @@ public class CIDRCalculateFragment extends Fragment {
         view.findViewById(R.id.cidrCalc).setOnClickListener(v -> {
 
 
-
-            if(octet4Data.getText().toString().equals("") || subOctet4Data.getText().toString().equals("")||
-                    octet3Data.getText().toString().equals("")|| subOctet3Data.getText().toString().equals("")||
-                    octet2Data.getText().toString().equals("")|| subOctet2Data.getText().toString().equals("")||
-                    octet1Data.getText().toString().equals("")|| subOctet1Data.getText().toString().equals("")) {
+            if (octet4Data.getText().toString().equals("") || subOctet4Data.getText().toString().equals("") ||
+                    octet3Data.getText().toString().equals("") || subOctet3Data.getText().toString().equals("") ||
+                    octet2Data.getText().toString().equals("") || subOctet2Data.getText().toString().equals("") ||
+                    octet1Data.getText().toString().equals("") || subOctet1Data.getText().toString().equals("")) {
                 Toast.makeText(requireActivity().getApplicationContext(), "You must enter numbers in all Fields ", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -133,7 +132,7 @@ public class CIDRCalculateFragment extends Fragment {
             } else
                 broadcastResult3 = network3Result;
 
-            if (subnetValue2 <=254) {
+            if (subnetValue2 <= 254) {
                 broadcastResult2 = ipValue2 | inverted2;
             } else
                 broadcastResult2 = network2Result;
@@ -152,16 +151,16 @@ public class CIDRCalculateFragment extends Fragment {
 
             if (network3Result <= 11111110) {
                 ipClass = "A";
-            } else if (network2Result <= 11111110){
+            } else if (network2Result <= 11111110) {
                 ipClass = "B";
-            } else if (network1Result >= 0-0000000) {
+            } else if (network1Result >= 0 - 0000000) {
                 ipClass = "C";
             }
             //        private TextView binIP, binMask, netAddr, broadcAddr, fUsableAddr, lUsableAddr, ipCls;
-            binIP.setText(binaryValue4 + "." + binaryValue3  + "." + binaryValue2  + "." + binaryValue1);
+            binIP.setText(binaryValue4 + "." + binaryValue3 + "." + binaryValue2 + "." + binaryValue1);
             binMask.setText(binaryOct4Result + "." + binaryOct3Result + "." + binaryOct2Result + "." + binaryOct1Result);
             netAddr.setText(network4Result + "." + network3Result + "." + network2Result + "." + network1Result);
-            broadcAddr.setText(network4Result + "." + broadcastResult3 + "." + broadcastResult2+ "." + broadcastResult1);
+            broadcAddr.setText(network4Result + "." + broadcastResult3 + "." + broadcastResult2 + "." + broadcastResult1);
             fUsableAddr.setText(network4Result + "." + network3Result + "." + network2Result + "." + firstUsable);
             lUsableAddr.setText(network4Result + "." + broadcastResult3 + "." + broadcastResult2 + "." + lastUsable);
             ipCls.setText(ipClass);

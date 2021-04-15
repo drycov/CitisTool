@@ -9,6 +9,9 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import cf.homeit.admintool.Activity.MainActivity;
 
+import static cf.homeit.admintool.ExtendsClases.SupportVoids.getStringPref;
+import static cf.homeit.admintool.ExtendsClases.SupportVoids.logOut;
+
 public class SharedPrefManager {
     @SuppressLint("StaticFieldLeak")
     private static SharedPrefManager mInstance;
@@ -29,7 +32,7 @@ public class SharedPrefManager {
     //method to let the user login
     //this method will store the user data in shared preferences
 
-//    public void userLogin(User user) {
+    //    public void userLogin(User user) {
 //        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(Constants.SHARED_PREF_NAME_USER, Context.MODE_PRIVATE);
 //        SharedPreferences.Editor editor = sharedPreferences.edit();
 //        editor.putString(Constants.KEY_FNAME, user.getFirstName());
@@ -39,7 +42,7 @@ public class SharedPrefManager {
 //        editor.putString(Constants.KEY_PHONE_NUM, user.getPhoneNumber());
 //        editor.apply();
 //    }
-    public void uidWrite(String uid){
+    public void uidWrite(String uid) {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(Constants.SHARED_PREF_NAME_USER, Context.MODE_PRIVATE);
         @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(Constants.TAG_UID, uid);
@@ -48,7 +51,7 @@ public class SharedPrefManager {
     //this method will logout the user
     public void logout() {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(Constants.SHARED_PREF_NAME_USER, Context.MODE_PRIVATE);
-        AppPref.logOut(mCtx,AppPref.getStringPref(mCtx,Constants.SHARED_PREF_NAME_USER, Constants.TAG_UID));
+        logOut(mCtx, getStringPref(mCtx, Constants.SHARED_PREF_NAME_USER, Constants.TAG_UID));
         SharedPreferences.Editor SPeditor = sharedPreferences.edit();
         SPeditor.clear();
         SPeditor.apply();

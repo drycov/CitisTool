@@ -1,5 +1,6 @@
 package cf.homeit.admintool.AbstractClases;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,11 +9,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.PopupMenu;
-import androidx.fragment.app.Fragment;
+import androidx.fragment.app.DialogFragment;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -29,7 +28,7 @@ import cf.homeit.admintool.ViewHolder.SwitchInterfaceViewHolder;
 import static cf.homeit.admintool.ExtendsClases.Constants.EXTRA_SWITCH_KEY;
 import static cf.homeit.admintool.ExtendsClases.SupportVoids.showToast;
 
-public abstract class AbstracttSwitchInterfaceFragment extends Fragment{
+public abstract class AbstracttSwitchInterfaceFragment extends DialogFragment {
     private static final String TAG = "AbstracttSwitchInterfaceFragment";
     // [START define_database_reference]
     private DatabaseReference mDatabase;
@@ -48,8 +47,9 @@ public abstract class AbstracttSwitchInterfaceFragment extends Fragment{
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        return inflater.inflate(R.layout.fragment_port,container, false);
+        return inflater.inflate(R.layout.fragment_port, container, false);
     }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         if (mDatabase == null) {
@@ -65,14 +65,15 @@ public abstract class AbstracttSwitchInterfaceFragment extends Fragment{
         mRecycler = view.findViewById(R.id.portList);
         mRecycler.setHasFixedSize(true);
     }
-//
+
+    //
 //
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
         // Set up Layout Manager, reverse layout
-        GridLayoutManager  mManager = new GridLayoutManager(requireActivity(),2);
+        GridLayoutManager mManager = new GridLayoutManager(requireActivity(), 2);
 //        mManager.setReverseLayout(true);
 //        mManager.setStackFromEnd(true);
         mRecycler.setLayoutManager(mManager);
@@ -80,12 +81,13 @@ public abstract class AbstracttSwitchInterfaceFragment extends Fragment{
         // Set up FirebaseRecyclerAdapter with the Query
         Query postsQuery = getQuery(mDatabase);
 
-        FirebaseRecyclerOptions options = new FirebaseRecyclerOptions.Builder<Port>()
+        FirebaseRecyclerOptions<Port> options = new FirebaseRecyclerOptions.Builder<Port>()
                 .setQuery(postsQuery, Port.class)
                 .build();
 
         mAdapter = new FirebaseRecyclerAdapter<Port, SwitchInterfaceViewHolder>(options) {
 
+            @SuppressLint("NonConstantResourceId")
             @Override
             protected void onBindViewHolder(@NonNull SwitchInterfaceViewHolder holder, int position, @NonNull Port model) {
                 final DatabaseReference postRef = getRef(position);

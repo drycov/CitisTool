@@ -15,17 +15,10 @@
         android:enabled="true"
         android:icon="@drawable/ic_network"
         android:title="@string/networkutilites"/>
-    <group>
-        <item
-            android:id="@+id/settings"
-            android:enabled="true"
-            android:icon="@drawable/ic_baseline_settings_24"
-            android:title="@string/settings" />
-        <item
-            android:id="@+id/exit"
-            android:enabled="true"
-            android:icon="@drawable/ic_baseline_power_settings_new_24"
-            android:title="@string/exit" />
-    </group>
+    <item
+        android:id="@+id/more"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_more_vert_24"
+        android:title="@string/more"/>
 
 </menu>

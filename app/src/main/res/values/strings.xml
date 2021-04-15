@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AdminTool</string>
+    <string name="app_name">CITISTool</string>
     <string name="vlsm_tabTitle">VLSM</string>
     <string name="cidr_tabTitle">CIDR</string>
     <string name="ip_title">Insert this IP-Address</string>
@@ -67,7 +67,8 @@
     <string name="pref_header_about">About</string>
     <string name="choose_email_client">Choose email client</string>
     <string name="summary_about">We are a team of like-minded people, specialized in development of Android App Development creating new trends across the app space. Glad to Help in anyway!</string>
-    <string name="app_version">3.5</string>
+    <string name="app_version">app_version</string>
+    <string name="creators_easter_egg">You are one step closer to the mystery! Steps left: </string>
     <string name="summary_support">Got any queries? We are happy to help!</string>
     <string name="title_send_feedback">Send Feedback</string>
     <string name="title_faq">FAQ</string>
@@ -84,6 +85,12 @@
     <string name="port_active">Port Active</string>
     <string name="all_ports">All ports</string>
     <string name="inactive_port">Inactive Port</string>
+    <string name="key_change_theme">day_night_switch</string>
+    <string name="more">More</string>
+    <string name="congratulations">Congratulations!</string>
+    <string name="you_have_found">You have found what is not hidden!</string>
+    <string name="about_me">About Me</string>
+    <string name="copy_right" translatable="false">Copyrights © %1$d</string>
 
     <string-array name="vlan_types_array">
         <item>Management</item>

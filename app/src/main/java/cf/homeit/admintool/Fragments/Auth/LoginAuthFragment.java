@@ -21,15 +21,15 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import cf.homeit.admintool.Activity.MainActivity;
 import cf.homeit.admintool.DataModels.User;
-import cf.homeit.admintool.ExtendsClases.AppPref;
 import cf.homeit.admintool.ExtendsClases.Constants;
 import cf.homeit.admintool.ExtendsClases.SharedPrefManager;
 import cf.homeit.admintool.R;
+
+import static cf.homeit.admintool.ExtendsClases.SupportVoids.setStringPref;
 
 public class LoginAuthFragment extends Fragment {
     private static final String TAG = LoginAuthFragment.class.getSimpleName();
@@ -37,19 +37,22 @@ public class LoginAuthFragment extends Fragment {
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
 
-    private TextInputEditText userEmail,userPassword;
+    private TextInputEditText userEmail, userPassword;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_auth, container, false);
 
     }
+
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         userEmail = view.findViewById(R.id.login_phone_number_editText);
         userPassword = view.findViewById(R.id.login_password_editText);
@@ -76,18 +79,18 @@ public class LoginAuthFragment extends Fragment {
                             FirebaseUser user = mAuth.getCurrentUser();
                             if (user != null) {
                                 String uid = user.getUid();
-                                Log.d(TAG,uid);
-                                AppPref.setStringPref(requireActivity().getApplicationContext(),  Constants.SHARED_PREF_NAME_USER, Constants.TAG_UID, uid);
+                                Log.d(TAG, uid);
+                                setStringPref(requireActivity().getApplicationContext(), Constants.SHARED_PREF_NAME_USER, Constants.TAG_UID, uid);
 
                                 mDatabase.child("users").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
-                                    public void onDataChange(DataSnapshot snapshot) {
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
                                         if (snapshot.getValue() == null) {
                                             navController = Navigation.findNavController(requireActivity(), R.id.first_nav_host);
                                             navController.navigate(R.id.createProfileFragment);
-                                        }else{
+                                        } else {
                                             getUserProfile(uid);
-                                            AppPref.setStringPref(requireActivity().getApplicationContext(),  Constants.SHARED_PREF_NAME_USER, Constants.TAG_UID, uid);
+                                            setStringPref(requireActivity().getApplicationContext(), Constants.SHARED_PREF_NAME_USER, Constants.TAG_UID, uid);
                                             SharedPrefManager.getInstance(requireActivity().getApplicationContext()).uidWrite(uid);
 //                                            navController = Navigation.findNavController(requireActivity(), R.id.first_nav_host);
 //                                            navController.navigate(R.id.todoListFragment);
@@ -106,7 +109,6 @@ public class LoginAuthFragment extends Fragment {
                             }
 
 
-
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
@@ -121,31 +123,31 @@ public class LoginAuthFragment extends Fragment {
         });
     }
 
-    private void getUserProfile(String uid){
+    private void getUserProfile(String uid) {
         mDatabase.child("users").child(uid).get().addOnCompleteListener(task -> {
             if (!task.isSuccessful()) {
 
                 Log.e("firebase", "Error getting data", task.getException());
-            }
-            else {
+            } else {
                 Log.d(TAG, String.valueOf(task.getResult()));
-                String middleName =  String.valueOf(task.getResult().child("middleName").getValue());
-                String eMail =  String.valueOf(task.getResult().child("eMail").getValue());
-                String lastName =  String.valueOf(task.getResult().child("lastName").getValue());
-                String firstName =  String.valueOf(task.getResult().child("firstName").getValue());
+                String middleName = String.valueOf(task.getResult().child("middleName").getValue());
+                String eMail = String.valueOf(task.getResult().child("eMail").getValue());
+                String lastName = String.valueOf(task.getResult().child("lastName").getValue());
+                String firstName = String.valueOf(task.getResult().child("firstName").getValue());
                 String userPhone = String.valueOf(task.getResult().child("phoneNumber").getValue());
                 String creationTime = String.valueOf(task.getResult().child("creationTime").getValue());
                 String appName = requireActivity().getApplicationContext().getApplicationInfo().loadLabel(requireActivity().getApplicationContext().getPackageManager()).toString();
-                AppPref.setStringPref(requireActivity().getApplicationContext(), uid, Constants.KEY_MNAME,middleName);
-                AppPref.setStringPref(requireActivity().getApplicationContext(), uid, Constants.KEY_EMAIL, eMail);
-                AppPref.setStringPref(requireActivity().getApplicationContext(), uid, Constants.KEY_LNAME, lastName);
-                AppPref.setStringPref(requireActivity().getApplicationContext(), uid, Constants.KEY_FNAME, firstName);
-                AppPref.setStringPref(requireActivity().getApplicationContext(), uid, Constants.KEY_PHONE_NUM, userPhone);
-                AppPref.setStringPref(requireActivity().getApplicationContext(), uid, Constants.KEY_CREATION_TIME, creationTime);
-                AppPref.setStringPref(requireActivity().getApplicationContext(), uid, Constants.APP_NAME, appName);
+                setStringPref(requireActivity().getApplicationContext(), uid, Constants.KEY_MNAME, middleName);
+                setStringPref(requireActivity().getApplicationContext(), uid, Constants.KEY_EMAIL, eMail);
+                setStringPref(requireActivity().getApplicationContext(), uid, Constants.KEY_LNAME, lastName);
+                setStringPref(requireActivity().getApplicationContext(), uid, Constants.KEY_FNAME, firstName);
+                setStringPref(requireActivity().getApplicationContext(), uid, Constants.KEY_PHONE_NUM, userPhone);
+                setStringPref(requireActivity().getApplicationContext(), uid, Constants.KEY_CREATION_TIME, creationTime);
+                setStringPref(requireActivity().getApplicationContext(), uid, Constants.APP_NAME, appName);
                 new User(
-                         firstName, lastName,
-                        middleName, eMail, userPhone,creationTime); }
+                        firstName, lastName,
+                        middleName, eMail, userPhone, creationTime);
+            }
         });
     }
 }

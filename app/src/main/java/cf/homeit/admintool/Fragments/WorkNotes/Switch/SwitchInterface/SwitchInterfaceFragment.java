@@ -14,7 +14,7 @@ public class SwitchInterfaceFragment extends AbstracttSwitchInterfaceFragment {
     public Query getQuery(DatabaseReference databaseReference) {
         Bundle bundle = this.getArguments();
         String swId = bundle.getString(EXTRA_SWITCH_KEY);
-        Log.d("DEBUG",swId);
+        Log.d("DEBUG", swId);
         return databaseReference.child("ports").child(swId);
     }
 

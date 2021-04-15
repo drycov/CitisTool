@@ -153,4 +153,8 @@
         android:id="@+id/switchInterfaceFragment"
         android:name="cf.homeit.admintool.Fragments.WorkNotes.Switch.SwitchInterface.SwitchInterfaceFragment"
         android:label="SwitchInterfaceFragment" />
+    <fragment
+        android:id="@+id/aboutMeFragment"
+        android:name="cf.homeit.admintool.Fragments.AboutMeFragment"
+        android:label="AboutMeFragment" />
 </navigation>

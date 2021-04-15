@@ -7,8 +7,8 @@
     <item android:drawable="@drawable/ic_launcher_background"/>
     <!-- Your product logo - 144dp color version of your app icon -->
     <item android:bottom="16dp"
-        android:width="144dp"
-        android:height="144dp"
+        android:width="380dp"
+        android:height="380dp"
         android:gravity="center"
         android:drawable="@drawable/ic_launcher_foreground"
         />

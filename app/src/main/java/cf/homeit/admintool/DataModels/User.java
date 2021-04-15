@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class User {
 
-    public String firstName, lastName,middleName, phoneNumber,eMail,creationTime;
+    public String firstName, lastName, middleName, phoneNumber, eMail, creationTime;
 
 
     public User() {
@@ -15,7 +15,7 @@ public class User {
 
 
     public User(String firstName, String lastName, String middleName,
-                String eMail, String phoneNumber,String creationTime) {
+                String eMail, String phoneNumber, String creationTime) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.middleName = middleName;
@@ -23,6 +23,7 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.creationTime = creationTime;
     }
+
     @Exclude
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();

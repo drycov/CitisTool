@@ -6,10 +6,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Switch {
-    public String switchId,switchIp,switchType,switchVendor,switchModel,switchSysName,switchLocation,switchDescr,switchSN,switchSubDescr,authorid,creationTime;
-    public  Switch(){}
-    public Switch(String switchId,String switchIp,String switchType,String switchVendor,String switchModel, String switchSysName, String switchLocation,
-                  String switchDescr, String switchSN, String switchSubDescr,String authorid,String creationTime){
+    public String switchId, switchIp, switchType, switchVendor, switchModel, switchSysName,
+            switchLocation, switchDescr, switchSN, switchSubDescr, authorId, creationTime;
+
+    public Switch() {
+    }
+
+    public Switch(String switchId, String switchIp, String switchType, String switchVendor, String switchModel, String switchSysName, String switchLocation,
+                  String switchDescr, String switchSN, String switchSubDescr, String authorId, String creationTime) {
         this.switchId = switchId;
         this.switchIp = switchIp;
         this.switchType = switchType;
@@ -20,7 +24,7 @@ public class Switch {
         this.switchDescr = switchDescr;
         this.switchSN = switchSN;
         this.switchSubDescr = switchSubDescr;
-        this.authorid = authorid;
+        this.authorId = authorId;
         this.creationTime = creationTime;
     }
 
@@ -37,7 +41,7 @@ public class Switch {
         result.put("switchDescr", switchDescr);
         result.put("switchSN", switchSN);
         result.put("switchSubDescr", switchSubDescr);
-        result.put("authorId", authorid);
+        result.put("authorId", authorId);
         result.put("creationTime", creationTime);
         return result;
     }

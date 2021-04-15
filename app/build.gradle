@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "cf.homeit.admintool"
-        minSdkVersion 16
+        minSdkVersion 19
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -63,6 +63,10 @@ dependencies {
 
     implementation 'com.github.nekocode:Badge:2.1'
     implementation 'com.opencsv:opencsv:5.4'
+
+    implementation 'com.github.Shashank02051997:FancyAboutPage-Android:2.6'
+    implementation 'com.mikhaellopez:circularimageview:4.2.0'
+
 
 
 

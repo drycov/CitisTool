@@ -86,8 +86,7 @@ public class VLSM extends HashMap {
     public static int getPrefixFromNumberOfAddresses(int numberOfAddresses) {
         int entryKey = 0;
         int closestHigherValue = 16777217;
-        for (HashMap.Entry<Integer, Integer> entry : prefixAndNumberOfAddresses.entrySet())
-        {
+        for (HashMap.Entry<Integer, Integer> entry : prefixAndNumberOfAddresses.entrySet()) {
             int entryValue = entry.getValue();
             if (entryValue >= numberOfAddresses && entryValue < closestHigherValue) {
                 closestHigherValue = entryValue;
@@ -99,8 +98,7 @@ public class VLSM extends HashMap {
     }
 
     public static int getPrefixFromSubnet(String subnet) {
-        for (HashMap.Entry<Integer, String> entry : prefixAndSubnet.entrySet())
-        {
+        for (HashMap.Entry<Integer, String> entry : prefixAndSubnet.entrySet()) {
             String entryValue = entry.getValue();
             if (entryValue.equals(subnet)) {
                 return entry.getKey();

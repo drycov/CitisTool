@@ -9,10 +9,10 @@ import com.google.android.material.textview.MaterialTextView;
 import cf.homeit.admintool.DataModels.Port;
 import cf.homeit.admintool.R;
 
-public class SwitchInterfaceViewHolder extends RecyclerView.ViewHolder{
+public class SwitchInterfaceViewHolder extends RecyclerView.ViewHolder {
     public final MaterialTextView portId;
 
-    public SwitchInterfaceViewHolder(View itemView){
+    public SwitchInterfaceViewHolder(View itemView) {
         super(itemView);
         portId = itemView.findViewById(R.id.portIdItem);
 //        portType = itemView.findViewById(R.id.portTypeItem);
@@ -20,6 +20,7 @@ public class SwitchInterfaceViewHolder extends RecyclerView.ViewHolder{
 //        portStatus = itemView.findViewById(R.id.portStatusItem);
 //        buttonViewOption = itemView.findViewById(R.id.textViewOptionsPort);
     }
+
     public void bindToModel(Port model) {
         portId.setText(model.portId);
 //        portType.setText(model.portType);

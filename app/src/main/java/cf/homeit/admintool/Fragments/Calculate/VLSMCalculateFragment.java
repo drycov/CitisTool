@@ -39,6 +39,7 @@ public class VLSMCalculateFragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
         return inflater.inflate(R.layout.fragment_calc_vlsm, container, false);
     }
+
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         elementsInit(view);
         btnCalculate.setOnClickListener(v -> calculateValues());
@@ -50,7 +51,7 @@ public class VLSMCalculateFragment extends Fragment {
 
     }
 
-    public void elementsInit(View view){
+    public void elementsInit(View view) {
         btnCalculate = view.findViewById(R.id.btnCalculate);
         etPrefix = view.findViewById(R.id.etPrefix);
         etSubnet = view.findViewById(R.id.etSubnet);
@@ -68,9 +69,8 @@ public class VLSMCalculateFragment extends Fragment {
             } else if (radSubnet.isChecked()) {
                 calculatePrefixAndNumberOfAddresses();
             }
-        }
-        else {
-            Toast.makeText(getActivity(), "Please input a valid Gateway Address (e.g 192.168.1.0)",Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(getActivity(), "Please input a valid Gateway Address (e.g 192.168.1.0)", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -162,7 +162,7 @@ public class VLSMCalculateFragment extends Fragment {
                 Integer.parseInt(strGatewayAddress[0]),
                 Integer.parseInt(strGatewayAddress[1]),
                 Integer.parseInt(strGatewayAddress[2]),
-                Integer.parseInt(strGatewayAddress[3]) };
+                Integer.parseInt(strGatewayAddress[3])};
 
         int[] firstAddress = Arrays.copyOf(gatewayAddress, gatewayAddress.length);
         firstAddress[3] = firstAddress[3] + 1;
@@ -206,9 +206,8 @@ public class VLSMCalculateFragment extends Fragment {
 
         if (checkAddressValid(firstAddress) && checkAddressValid(finalAddress) && checkAddressValid(broadcastAddress)) {
             tvResult.setText(String.format(getString(R.string.result_values), etGatewayAddress.getText(), strFirstAddress, strFinalAddress, strBroadcastAddress));
-        }
-        else {
-            Toast.makeText(requireActivity(),"IP Address out of bounds, ensure network range is large enough", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(requireActivity(), "IP Address out of bounds, ensure network range is large enough", Toast.LENGTH_LONG).show();
         }
     }
 

@@ -8,9 +8,10 @@ import cf.homeit.admintool.AbstractClases.AbstractNoteFragment;
 import static cf.homeit.admintool.ExtendsClases.SupportVoids.getUid;
 
 public class NoteFragment extends AbstractNoteFragment {
-   public NoteFragment(){
+    public NoteFragment() {
 
     }
+
     public Query getQuery(DatabaseReference databaseReference) {
         return databaseReference.child("notes").child(getUid(requireActivity().getApplicationContext()));
     }

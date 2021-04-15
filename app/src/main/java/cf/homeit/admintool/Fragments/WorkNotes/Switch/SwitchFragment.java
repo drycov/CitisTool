@@ -6,9 +6,10 @@ import com.google.firebase.database.Query;
 import cf.homeit.admintool.AbstractClases.AbstractSwitchFragment;
 
 public class SwitchFragment extends AbstractSwitchFragment {
-    public SwitchFragment(){
+    public SwitchFragment() {
 
     }
+
     public Query getQuery(DatabaseReference databaseReference) {
         return databaseReference.child("switches");
     }

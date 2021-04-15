@@ -40,13 +40,13 @@ import static cf.homeit.admintool.ExtendsClases.SupportVoids.getTime;
 import static cf.homeit.admintool.ExtendsClases.SupportVoids.getUid;
 import static cf.homeit.admintool.ExtendsClases.SupportVoids.showToast;
 
-public class SwitchDetailFragment extends Fragment{
+public class SwitchDetailFragment extends Fragment {
     private static final String TAG = "SwitchDetailActivity";
-    private TextInputEditText switchPortCountAll,switchSN,switchSysName,switchVendor,switchModel,switchIp,switchLocation,switchDescr,switchSubDescr;
+    private TextInputEditText switchPortCountAll, switchSN, switchSysName, switchVendor, switchModel, switchIp, switchLocation, switchDescr, switchSubDescr;
     private MaterialAutoCompleteTextView switchTypeItem;
     private ValueEventListener mPostListener;
     private FloatingActionButton saveBtn;
-    private DatabaseReference mPostReference,mDatabase;
+    private DatabaseReference mPostReference, mDatabase;
     private String mPostKey;
     NavController navController;
 
@@ -60,17 +60,18 @@ public class SwitchDetailFragment extends Fragment{
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        return inflater.inflate(R.layout.fragment_switch_detail,container, false);
+        return inflater.inflate(R.layout.fragment_switch_detail, container, false);
     }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         init(view);
         Bundle bundle = this.getArguments();
         mPostKey = bundle.getString(EXTRA_SWITCH_KEY);
         boolean ed = bundle.getBoolean(EXTRA_EDIT_KEY);
-        if (!ed){
+        if (!ed) {
             editsTextChanged();
-        }else{
+        } else {
             switchSN.setEnabled(false);
             switchSN.setCursorVisible(false);
             switchSN.setBackgroundColor(Color.TRANSPARENT);
@@ -88,23 +89,23 @@ public class SwitchDetailFragment extends Fragment{
         switchPortCountAll.setOnClickListener(v -> {
             bundle.putString(EXTRA_SWITCH_KEY, mPostKey);
             navController = Navigation.findNavController(requireActivity(), R.id.first_nav_host);
-            navController.navigate(R.id.switchInterfaceFragment,bundle);
+            navController.navigate(R.id.switchInterfaceFragment, bundle);
         });
     }
 
     private void init(View view) {
-        switchSN=view.findViewById(R.id.switchSN);
+        switchSN = view.findViewById(R.id.switchSN);
         switchTypeItem = view.findViewById(R.id.switchTypeItem);
-        switchSysName=view.findViewById(R.id.switchSysName);
-        switchVendor=view.findViewById(R.id.switchVendor);
-        switchModel=view.findViewById(R.id.switchModel);
-        switchIp=view.findViewById(R.id.switchIp);
-        switchLocation=view.findViewById(R.id.switchLocation);
-        switchDescr=view.findViewById(R.id.switchDescr);
-        switchSubDescr=view.findViewById(R.id.switchSubDescr);
+        switchSysName = view.findViewById(R.id.switchSysName);
+        switchVendor = view.findViewById(R.id.switchVendor);
+        switchModel = view.findViewById(R.id.switchModel);
+        switchIp = view.findViewById(R.id.switchIp);
+        switchLocation = view.findViewById(R.id.switchLocation);
+        switchDescr = view.findViewById(R.id.switchDescr);
+        switchSubDescr = view.findViewById(R.id.switchSubDescr);
         saveBtn = view.findViewById(R.id.svitchDetailSave);
         switchPortCountAll = view.findViewById(R.id.portStatusAll);
-        ArrayAdapter<CharSequence> arrayAdapter =ArrayAdapter.createFromResource(requireActivity(),R.array.switch_types_array,R.layout.item_drop_down);
+        ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(requireActivity(), R.array.switch_types_array, R.layout.item_drop_down);
         switchTypeItem.setAdapter(arrayAdapter);
     }
 
@@ -141,7 +142,7 @@ public class SwitchDetailFragment extends Fragment{
                 // Getting Post failed, log a message
                 Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
                 // [START_EXCLUDE]
-                showToast(requireContext().getApplicationContext(),"Failed to load post.");
+                showToast(requireContext().getApplicationContext(), "Failed to load post.");
                 // [END_EXCLUDE]
             }
         };
@@ -165,7 +166,7 @@ public class SwitchDetailFragment extends Fragment{
 
     }
 
-    public void editsTextChanged(){
+    public void editsTextChanged() {
         saveBtn.setVisibility(View.GONE);
         switchSN.setEnabled(false);
         switchSN.setCursorVisible(false);
@@ -218,9 +219,9 @@ public class SwitchDetailFragment extends Fragment{
         final String switchSubDescrStr = switchSubDescr.getText().toString();
         final String switchTypeStr = switchTypeItem.getText().toString();
         final String dateTime = getTime();
-        if (TextUtils.isEmpty(switchIpStr)||TextUtils.isEmpty(switchSysNameStr)||TextUtils.isEmpty(switchLocationStr)||TextUtils.isEmpty(switchSNStr)) {
+        if (TextUtils.isEmpty(switchIpStr) || TextUtils.isEmpty(switchSysNameStr) || TextUtils.isEmpty(switchLocationStr) || TextUtils.isEmpty(switchSNStr)) {
 //            titleEt.setError(REQUIRED);
-            showToast(requireActivity().getApplicationContext(),"Switch IP, SN, System name, Location is Required!!!");
+            showToast(requireActivity().getApplicationContext(), "Switch IP, SN, System name, Location is Required!!!");
             return;
         }
 
@@ -228,21 +229,21 @@ public class SwitchDetailFragment extends Fragment{
         showToast(requireActivity().getApplicationContext(), "Posting...");
         // [START single_value_read]
         String uid = getUid(requireActivity().getApplicationContext());
-        writeNewPost(uid, switchIpStr,switchTypeStr,switchVendorStr,switchModelStr,switchSysNameStr,switchLocationStr,switchDescrStr,switchSNStr,switchSubDescrStr, dateTime);
+        writeNewPost(uid, switchIpStr, switchTypeStr, switchVendorStr, switchModelStr, switchSysNameStr, switchLocationStr, switchDescrStr, switchSNStr, switchSubDescrStr, dateTime);
         navController = Navigation.findNavController(requireActivity(), R.id.first_nav_host);
         navController.navigate(R.id.workNotesFragment);
     }
 
 
-    private void writeNewPost(String uid, String switchIpStr,String switchTypeStr,String switchVendorStr,String switchModelStr,
-                              String switchSysNameStr,String switchLocationStr,
-                              String switchDescrStr,String switchSNStr,String switchSubDescrStr,String time) {
+    private void writeNewPost(String uid, String switchIpStr, String switchTypeStr, String switchVendorStr, String switchModelStr,
+                              String switchSysNameStr, String switchLocationStr,
+                              String switchDescrStr, String switchSNStr, String switchSubDescrStr, String time) {
 
         String key = mDatabase.child("switches").child(uid).push().getKey();
-        Switch model = new Switch(key, switchIpStr,switchTypeStr,switchVendorStr,switchModelStr,switchSysNameStr,switchLocationStr,switchDescrStr,switchSNStr,switchSubDescrStr, uid, time);
+        Switch model = new Switch(key, switchIpStr, switchTypeStr, switchVendorStr, switchModelStr, switchSysNameStr, switchLocationStr, switchDescrStr, switchSNStr, switchSubDescrStr, uid, time);
         Map<String, Object> postValues = model.toMap();
         Map<String, Object> childUpdates = new HashMap<>();
-        childUpdates.put("/switches/"  + switchSNStr, postValues);
+        childUpdates.put("/switches/" + switchSNStr, postValues);
         mDatabase.updateChildren(childUpdates);
 
     }

@@ -24,7 +24,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
 import java.util.Map;
 
-import cf.homeit.admintool.Activity.MainActivity;
 import cf.homeit.admintool.DataModels.Note;
 import cf.homeit.admintool.DataModels.User;
 import cf.homeit.admintool.R;
@@ -33,7 +32,7 @@ import static cf.homeit.admintool.ExtendsClases.SupportVoids.getTime;
 import static cf.homeit.admintool.ExtendsClases.SupportVoids.getUid;
 import static cf.homeit.admintool.ExtendsClases.SupportVoids.showToast;
 
-public class NoteNewFragment extends Fragment{
+public class NoteNewFragment extends Fragment {
     private static final String TAG = "NewPostActivity";
     private static final CharSequence REQUIRED = "Required";
     private EditText titleEt;
@@ -51,8 +50,9 @@ public class NoteNewFragment extends Fragment{
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        return inflater.inflate(R.layout.fragment_note_new,container, false);
+        return inflater.inflate(R.layout.fragment_note_new, container, false);
     }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -63,14 +63,9 @@ public class NoteNewFragment extends Fragment{
         titleEt = view.findViewById(R.id.note_title);
         contentEt = view.findViewById(R.id.note_content);
         saveBtn = view.findViewById(R.id.noteSave);
-        saveBtn.setOnClickListener(view1 -> {
-            submitPost();
-        });
+        saveBtn.setOnClickListener(view1 -> submitPost());
     }
 
-
-
-    
 
     private void setEditingEnabled(boolean enabled) {
         titleEt.setEnabled(enabled);
@@ -139,8 +134,9 @@ public class NoteNewFragment extends Fragment{
                 });
         // [END single_value_read]
     }
+
     // [START write_fan_out]
-    private void writeNewPost(String uid, String title, String body,String time) {
+    private void writeNewPost(String uid, String title, String body, String time) {
         // Create new post at /user-posts/$userid/$postid and at
         // /posts/$postid simultaneously
         String key = mDatabase.child("notes").child(uid).push().getKey();
@@ -148,7 +144,7 @@ public class NoteNewFragment extends Fragment{
         Map<String, Object> postValues = note.toMap();
 
         Map<String, Object> childUpdates = new HashMap<>();
-        childUpdates.put("/notes/" +uid +"/" + key, postValues);
+        childUpdates.put("/notes/" + uid + "/" + key, postValues);
         mDatabase.updateChildren(childUpdates);
     }
 

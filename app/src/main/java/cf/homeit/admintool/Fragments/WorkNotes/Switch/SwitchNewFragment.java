@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,6 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
 import java.util.Map;
 
+import cf.homeit.admintool.DataModels.Port;
 import cf.homeit.admintool.DataModels.Switch;
 import cf.homeit.admintool.DataModels.User;
 import cf.homeit.admintool.R;
@@ -36,7 +38,7 @@ import static cf.homeit.admintool.ExtendsClases.SupportVoids.showToast;
 
 public class SwitchNewFragment extends Fragment {
     private static final String TAG = "NewSwitchActivity";
-    private TextInputEditText switchIp,switchVendor,switchModel,switchSysName,switchLocation,switchDescr,switchSN,switchSubDescr;
+    private TextInputEditText switchIp, switchVendor, switchModel, switchSysName, switchLocation, switchDescr, switchSN, switchSubDescr, switchPort;
     private MaterialAutoCompleteTextView switchType;
 
     private DatabaseReference mDatabase;
@@ -52,8 +54,9 @@ public class SwitchNewFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        return inflater.inflate(R.layout.fragment_switch_new,container, false);
+        return inflater.inflate(R.layout.fragment_switch_new, container, false);
     }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -70,9 +73,10 @@ public class SwitchNewFragment extends Fragment {
         switchDescr = view.findViewById(R.id.fieldSwitchDescr);
         switchSN = view.findViewById(R.id.fieldSwitchSN);
         switchSubDescr = view.findViewById(R.id.fieldSwitchSubDescr);
+        switchPort = view.findViewById(R.id.switchPort);
         saveBtn = view.findViewById(R.id.fabSaveSwitch);
         saveBtn.setOnClickListener(view1 -> submitPost());
-        ArrayAdapter<CharSequence> arrayAdapter =ArrayAdapter.createFromResource(requireActivity(),R.array.switch_types_array,R.layout.item_drop_down);
+        ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(requireActivity(), R.array.switch_types_array, R.layout.item_drop_down);
         switchType.setAdapter(arrayAdapter);
     }
 
@@ -86,6 +90,7 @@ public class SwitchNewFragment extends Fragment {
         switchSN.setEnabled(enabled);
         switchSubDescr.setEnabled(enabled);
         switchType.setEnabled(enabled);
+        switchPort.setEnabled(enabled);
         if (enabled) {
             saveBtn.show();
         } else {
@@ -104,12 +109,12 @@ public class SwitchNewFragment extends Fragment {
         final String switchSNStr = switchSN.getText().toString();
         final String switchSubDescrStr = switchSubDescr.getText().toString();
         final String switchTypeStr = switchType.getText().toString();
-//        final String switchVendorStr = contentEt.getText().toString();
+        final String switchPortStr = switchPort.getText().toString();
         final String dateTime = getTime();
         // Title is required
-        if (TextUtils.isEmpty(switchIpStr)||TextUtils.isEmpty(switchSysNameStr)||TextUtils.isEmpty(switchLocationStr)||TextUtils.isEmpty(switchSNStr)) {
+        if (TextUtils.isEmpty(switchIpStr) || TextUtils.isEmpty(switchSysNameStr) || TextUtils.isEmpty(switchLocationStr) || TextUtils.isEmpty(switchSNStr)) {
 //            titleEt.setError(REQUIRED);
-            showToast(requireActivity().getApplicationContext(),"Switch IP, SN, System name, Location is Required!!!");
+            showToast(requireActivity().getApplicationContext(), "Switch IP, SN, System name, Location is Required!!!");
             return;
         }
 
@@ -134,7 +139,8 @@ public class SwitchNewFragment extends Fragment {
                                     "Error: could not fetch user.");
                         } else {
                             // Write new post
-                            writeNewPost(uid, switchIpStr,switchTypeStr,switchVendorStr,switchModelStr,switchSysNameStr,switchLocationStr,switchDescrStr,switchSNStr,switchSubDescrStr, dateTime);
+                            writeNewPost(uid, switchIpStr, switchTypeStr, switchVendorStr, switchModelStr, switchSysNameStr,
+                                    switchLocationStr, switchDescrStr, switchSNStr, switchSubDescrStr, dateTime, switchPortStr);
                             navController = Navigation.findNavController(requireActivity(), R.id.first_nav_host);
                             navController.navigate(R.id.workNotesFragment);
                         }
@@ -155,19 +161,34 @@ public class SwitchNewFragment extends Fragment {
                 });
         // [END single_value_read]
     }
+
     // [START write_fan_out]
-    private void writeNewPost(String uid, String switchIpStr,String switchTypeStr,String switchVendorStr,String switchModelStr,
-                              String switchSysNameStr,String switchLocationStr,
-                              String switchDescrStr,String switchSNStr,String switchSubDescrStr,String time) {
+    private void writeNewPost(String uid, String switchIpStr, String switchTypeStr, String switchVendorStr, String switchModelStr,
+                              String switchSysNameStr, String switchLocationStr,
+                              String switchDescrStr, String switchSNStr, String switchSubDescrStr, String time, String portStr) {
 
         String key = mDatabase.child("switches").child(uid).push().getKey();
-        Switch model = new Switch(key, switchIpStr,switchTypeStr,switchVendorStr,switchModelStr,switchSysNameStr,switchLocationStr,switchDescrStr,switchSNStr,switchSubDescrStr, uid, time);
+        Switch model = new Switch(key, switchIpStr, switchTypeStr, switchVendorStr, switchModelStr, switchSysNameStr, switchLocationStr,
+                switchDescrStr, switchSNStr, switchSubDescrStr, uid, time);
         Map<String, Object> postValues = model.toMap();
-
         Map<String, Object> childUpdates = new HashMap<>();
-        childUpdates.put("/switches/"  + switchSNStr, postValues);
+//        createPorts(uid,switchSNStr,portStr,time);
+
+        for (int i = 1; i == Integer.parseInt(portStr); i++) {
+            Port port = new Port("SW" + i, "FE", "100M", "def", "nan", "00:00:00:00:00:00", "nan", uid, time);
+            Map<String, Object> portValues = port.toMap();
+            Map<String, Object> portUpdates = new HashMap<>();
+            portUpdates.put("/ports/" + switchSNStr, portValues);
+            mDatabase.updateChildren(portUpdates);
+        }
+        childUpdates.put("/switches/" + switchSNStr, postValues);
+        Toast.makeText(requireActivity().getApplicationContext(), "ADED", Toast.LENGTH_SHORT).show();
+
         mDatabase.updateChildren(childUpdates);
     }
 
+    private void createPorts(String uid, String switchSNStr, String portStr, String time) {
+
+    }
 }
 

@@ -25,7 +25,7 @@ public class WorkNotesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_switch_vlan_base,container, false);
+        View view = inflater.inflate(R.layout.fragment_switch_vlan_base, container, false);
         // Setting ViewPager for each Tabs
         ViewPager viewPager = (ViewPager) view.findViewById(R.id.wn_viewpager);
         setupViewPager(viewPager);

@@ -1,6 +1,6 @@
 package cf.homeit.admintool.ExtendsClases;
 
-public  class Constants {
+public class Constants {
     public static final String SHARED_PREF_NAME_FCM = "FCMSharedPref";
     public static final String SHARED_PREF_NAME_USER = "USERSharedPref";
     public static final String APP_NAME = "appname";

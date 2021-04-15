@@ -31,7 +31,7 @@ public class ForgotPassworFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_auth_restore, container, false);
+        View view = inflater.inflate(R.layout.fragment_auth_restore, container, false);
 
         edtEmail = view.findViewById(R.id.user_e_mail_editText);
         Button btnResetPassword = (Button) view.findViewById(R.id.letForgotPassword);
@@ -58,11 +58,9 @@ public class ForgotPassworFragment extends Fragment {
                     });
         });
 
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navController = Navigation.findNavController(getActivity(), R.id.first_nav_host);
-                navController.navigate(R.id.loginAuthFragment);            }
+        btnBack.setOnClickListener(v -> {
+            navController = Navigation.findNavController(getActivity(), R.id.first_nav_host);
+            navController.navigate(R.id.loginAuthFragment);
         });
         return view;
     }

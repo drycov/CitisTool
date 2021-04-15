@@ -5,7 +5,7 @@
         <SwitchPreference
             android:defaultValue="false"
             android:icon="@drawable/ic_baseline_mode_night_24"
-            android:key="day_night_switch"
+            android:key="@string/key_change_theme"
             android:title="Dark theme" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/pref_header_about">
@@ -15,8 +15,8 @@
             android:summary="@string/summary_about" />
 
         <Preference
-            android:key="@string/app_version"
-            android:summary="@string/app_version"
+            android:key="app_version"
+            android:summary="1.1"
             android:title="@string/title_version" />
 
         <Preference

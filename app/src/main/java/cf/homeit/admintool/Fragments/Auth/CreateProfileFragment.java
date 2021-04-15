@@ -39,11 +39,10 @@ import static cf.homeit.admintool.ExtendsClases.SupportVoids.showToast;
 
 public class CreateProfileFragment extends Fragment {
     private static final String TAG = "CreateProfileFragment";
-    private TextInputEditText firstName, lastName,middleName, phoneNumber,eMail;
+    private TextInputEditText firstName, lastName, middleName, phoneNumber, eMail;
 
 
     private DatabaseReference mDatabase;
-    private Button saveBtn;
     private NavController navController;
 
     @Override
@@ -55,8 +54,9 @@ public class CreateProfileFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        return inflater.inflate(R.layout.fragment_auth_profile,container, false);
+        return inflater.inflate(R.layout.fragment_auth_profile, container, false);
     }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -70,7 +70,7 @@ public class CreateProfileFragment extends Fragment {
         middleName = view.findViewById(R.id.profile_m_name_editText);
         phoneNumber = view.findViewById(R.id.profile_user_phone);
         eMail = view.findViewById(R.id.profile_e_mail_editText);
-        saveBtn = view.findViewById(R.id.letTheCreateUserProfile);
+        Button saveBtn = view.findViewById(R.id.letTheCreateUserProfile);
         saveBtn.setOnClickListener(view1 -> submitPost());
     }
 
@@ -85,16 +85,16 @@ public class CreateProfileFragment extends Fragment {
 
         final String dateTime = getTime();
         // Title is required
-        if (TextUtils.isEmpty(firstNameStr)||TextUtils.isEmpty(lastNameStr)||TextUtils.isEmpty(middleNameStr)||TextUtils.isEmpty(phoneNumbreStr)||TextUtils.isEmpty(eMailStr)) {
+        if (TextUtils.isEmpty(firstNameStr) || TextUtils.isEmpty(lastNameStr) || TextUtils.isEmpty(middleNameStr) || TextUtils.isEmpty(phoneNumbreStr) || TextUtils.isEmpty(eMailStr)) {
 //            titleEt.setError(REQUIRED);
-            showToast(requireActivity().getApplicationContext(),"All fields is Required!!!");
+            showToast(requireActivity().getApplicationContext(), "All fields is Required!!!");
             return;
         }
 
         // Disable button so there are no multi-posts
         showToast(requireActivity().getApplicationContext(), "Posting...");
         String uid = getUid(requireActivity().getApplicationContext());
-        writeNewUser(uid,firstNameStr, lastNameStr,middleNameStr,eMailStr ,phoneNumbreStr, dateTime);
+        writeNewUser(uid, firstNameStr, lastNameStr, middleNameStr, eMailStr, phoneNumbreStr, dateTime);
         // Finish this Activity, back to the stream
 //        navController = Navigation.findNavController(requireActivity(), R.id.first_nav_host);
 //        navController.navigate(R.id.todoListFragment);
@@ -103,20 +103,21 @@ public class CreateProfileFragment extends Fragment {
                 .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
         // [END single_value_read]
     }
-    // [START write_fan_out]
-    private void writeNewPost(String uid, String a,String b,String c,
-                              String d,String e,String time) {
 
-        User model = new User(a, b,c,d,e, time);
+    // [START write_fan_out]
+    private void writeNewPost(String uid, String a, String b, String c,
+                              String d, String e, String time) {
+
+        User model = new User(a, b, c, d, e, time);
         Map<String, Object> postValues = model.toMap();
 
         Map<String, Object> childUpdates = new HashMap<>();
-        childUpdates.put("/users/"  + uid, postValues);
+        childUpdates.put("/users/" + uid, postValues);
         mDatabase.updateChildren(childUpdates);
     }
 
-    private void writeNewUser(String uid, String firstName, String lastName, String middleName, String eMail,String phoneNumber, String dateTim) {
-        User user = new User(firstName,lastName,middleName,eMail,phoneNumber,dateTim);
+    private void writeNewUser(String uid, String firstName, String lastName, String middleName, String eMail, String phoneNumber, String dateTim) {
+        User user = new User(firstName, lastName, middleName, eMail, phoneNumber, dateTim);
         mDatabase.child("users").child(uid).setValue(user);
     }
 

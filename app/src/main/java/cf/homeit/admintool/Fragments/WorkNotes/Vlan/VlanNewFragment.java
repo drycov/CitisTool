@@ -36,7 +36,7 @@ import static cf.homeit.admintool.ExtendsClases.SupportVoids.showToast;
 
 public class VlanNewFragment extends Fragment {
     private static final String TAG = "NewSwitchActivity";
-    private TextInputEditText vlanId,vlanName,vlanDescr,valnIpInterface,vlanSubDescr;
+    private TextInputEditText vlanId, vlanName, vlanDescr, valnIpInterface, vlanSubDescr;
     private MaterialAutoCompleteTextView vlanType;
 
     private DatabaseReference mDatabase;
@@ -52,8 +52,9 @@ public class VlanNewFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        return inflater.inflate(R.layout.fragment_vlan_new,container, false);
+        return inflater.inflate(R.layout.fragment_vlan_new, container, false);
     }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -69,7 +70,7 @@ public class VlanNewFragment extends Fragment {
         vlanSubDescr = view.findViewById(R.id.fieldVLANSubDescription);
         saveBtn = view.findViewById(R.id.fabSaveVlan);
         saveBtn.setOnClickListener(view1 -> submitPost());
-        ArrayAdapter<CharSequence> arrayAdapter =ArrayAdapter.createFromResource(requireActivity(),R.array.vlan_types_array,R.layout.item_drop_down);
+        ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(requireActivity(), R.array.vlan_types_array, R.layout.item_drop_down);
         vlanType.setAdapter(arrayAdapter);
     }
 
@@ -100,9 +101,9 @@ public class VlanNewFragment extends Fragment {
 
         final String dateTime = getTime();
         // Title is required
-        if (TextUtils.isEmpty(vlanIdStr)||TextUtils.isEmpty(vlanNameStr)) {
+        if (TextUtils.isEmpty(vlanIdStr) || TextUtils.isEmpty(vlanNameStr)) {
 //            titleEt.setError(REQUIRED);
-            showToast(requireActivity().getApplicationContext(),"Vlan Id, name, is Required!!!");
+            showToast(requireActivity().getApplicationContext(), "Vlan Id, name, is Required!!!");
             return;
         }
 
@@ -128,7 +129,7 @@ public class VlanNewFragment extends Fragment {
                         } else {
                             // Write new post
 
-                            writeNewPost(uid,vlanIdStr, vlanNameStr,vlanTypeStr,vlanDescrStr ,valnIpInterfaceStr,vlanSubDescrStr, dateTime);
+                            writeNewPost(uid, vlanIdStr, vlanNameStr, vlanTypeStr, vlanDescrStr, valnIpInterfaceStr, vlanSubDescrStr, dateTime);
                             navController = Navigation.findNavController(requireActivity(), R.id.first_nav_host);
                             navController.navigate(R.id.workNotesFragment);
                         }
@@ -149,21 +150,22 @@ public class VlanNewFragment extends Fragment {
                 });
         // [END single_value_read]
     }
+
     // [START write_fan_out]
 //    vlanId,vlanName,vlanType,vlanDescr,valnIpInterface,vlanSubDescr,authorid,creationTime
-    private void writeNewPost(String uid, String vlanId,String vlanName,String vlanType,
-                              String vlanDescr,String valnIpInterface,
-                              String vlanSubDescr,String time) {
+    private void writeNewPost(String uid, String vlanId, String vlanName, String vlanType,
+                              String vlanDescr, String valnIpInterface,
+                              String vlanSubDescr, String time) {
         // Create new post at /user-posts/$userid/$postid and at
         // /posts/$postid simultaneously
 //        String vlanId,String vlanName, String vlanType, String vlanDescr,
 //                String valnIpInterface, String vlanSubDescr,String authorid,String creationTime
 //        String key = mDatabase.child("notes").child(uid).push().getKey();
-        Vlan model = new Vlan(vlanId, vlanName,vlanType,vlanDescr,valnIpInterface,vlanSubDescr, uid, time);
+        Vlan model = new Vlan(vlanId, vlanName, vlanType, vlanDescr, valnIpInterface, vlanSubDescr, uid, time);
         Map<String, Object> postValues = model.toMap();
 
         Map<String, Object> childUpdates = new HashMap<>();
-        childUpdates.put("/vlans/"  + vlanId, postValues);
+        childUpdates.put("/vlans/" + vlanId, postValues);
         mDatabase.updateChildren(childUpdates);
     }
 
